@@ -1,0 +1,21 @@
+{
+  "name": "iot-logger",
+  "version": "1.0.0",
+  "description": "Logger module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
+  },
+  "keywords": [
+    "logging"
+  ],
+  "author": "Rodrigo de Souza (rsouza01@gmail.com)",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^12.12.14",
+    "nodemon": "^2.0.1",
+    "tslint": "^5.20.1",
+    "typescript": "^3.7.3"
+  }
+}
