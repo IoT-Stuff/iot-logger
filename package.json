@@ -1,9 +1,11 @@
 {
-  "name": "iot-logger",
+  "name": "@Iot-Stuff/iot-logger",
   "version": "1.0.0",
   "description": "Logger module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "publishConfig": { "registry": "https://npm.pkg.github.com/" },
+  "repository":  "git://github.com/IoT-Stuff/iot-logger",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepublish": "npm run build",
