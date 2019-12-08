@@ -4,10 +4,12 @@
   "description": "Logger module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "publishConfig": { "registry": "https://npm.pkg.github.com/" },
-  "repository":  "git://github.com/IoT-Stuff/iot-logger",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "repository": "git://github.com/IoT-Stuff/iot-logger",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test:unit": "clear; npx mocha --recursive -r ts-node/register ./test/**/*.unit.ts",
     "prepublish": "npm run build",
     "build": "tsc"
   },
@@ -17,9 +19,17 @@
   "author": "Rodrigo de Souza (rsouza01@gmail.com)",
   "license": "MIT",
   "devDependencies": {
+    "@types/mocha": "^5.2.7",
     "@types/node": "^12.12.14",
+    "chai": "^4.2.0",
+    "mocha": "^6.2.2",
     "nodemon": "^2.0.1",
+    "ts-node": "^8.5.4",
     "tslint": "^5.20.1",
     "typescript": "^3.7.3"
+  },
+  "dependencies": {
+    "moment": "^2.24.0",
+    "uuid": "^3.3.3"
   }
 }
