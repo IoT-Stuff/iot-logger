@@ -3,36 +3,38 @@
 import uuid from 'uuid/v4';
 import moment from 'moment';
 import winston from 'winston';
+import { Format } from 'logform';
 
 const { createLogger, format, transports } = winston;
+import * as Transport from 'winston-transport';
 
-const iotLoggerFormat = format.printf(({ level, message, label, timestamp }) => {
-  return `[${timestamp}] [${label}] ${level}: ${message}`;
-});
+export interface IoTLoggerConfig {
+  loggingApplicationName: string,
+  loggingApplicationVersion: string,
+  format: Format;
+  fileName?: string;
+}
 
-
-export default class IoTLogger {
+export class IoTLogger {
 
   logger: winston.Logger;
 
-  constructor(filename: string) {
-    const loggingApplicationName = process.env.ApplicationName;
-    const loggingApplicationVersion = process.env.ApplicationVersion;
+  constructor(loggerConfig: IoTLoggerConfig) {
     const transactionId = uuid();
 
-    const logFormat = format.combine(
-      format.colorize(),
-      format.label({ label: loggingApplicationName }),
-      format.timestamp(),
-      iotLoggerFormat
-    );
+    let transports: Transport[] = [
+      new winston.transports.Console(),
+    ]
+
+    if (loggerConfig.fileName) {
+      transports.push(
+        new winston.transports.File({ filename: loggerConfig.fileName })
+      );
+    }
 
     this.logger = winston.createLogger({
-      format: logFormat, 
-      transports: [
-        new winston.transports.Console(),
-        new winston.transports.File({ filename })
-      ]
+      format: loggerConfig.format,
+      transports
     });
   }
 
