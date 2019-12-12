@@ -1,8 +1,9 @@
 import { expect } from 'chai';
 import 'mocha';
 import fs from 'fs';
-import winston from 'winston';
 import sinon from 'sinon';
+
+import winston from 'winston';
 
 const proxyquire = require('proxyquire').noPreserveCache()
 
@@ -27,20 +28,52 @@ describe('Default IotLogger', () => {
     expect(iotLogger).not.to.be.undefined;
   });
 
-  it.skip('Log debug to console', () => {
+  it.only('Log debug to console', () => {
+
+    const message: string = 'Info message';
+    const iotLogger = defaultLogger.getIoTDefaultLogger('ApplicationName', '1');
+    const loggerSpy = sinon.spy(iotLogger.logger, 'info');
+
+    iotLogger.debug(message);
+
+    expect(iotLogger).not.to.be.undefined;
+    expect(loggerSpy.calledOnce).to.be.true;
+  });
+
+  it.only('Log info to console', () => {
 
     const iotLogger = defaultLogger.getIoTDefaultLogger('ApplicationName', '1');
+    const message: string = 'Info message';
+    const loggerSpy = sinon.spy(iotLogger.logger, 'info');
+
+    iotLogger.info(message);
+
     expect(iotLogger).not.to.be.undefined;
+    expect(loggerSpy.calledOnce).to.be.true;
+  });
 
-    const winstonInfoSpy = sinon.spy(winston, 'log');
-    
-    iotLogger.info('What rolls down stairs');
+  it.only('Log warn to console', () => {
 
-    
-    expect(winstonInfoSpy.calledOnce).to.be.true;
-    // iotLogger.warning('Whats great for a snack,');
-    // iotLogger.error('Its log, log, log');    
+    const iotLogger = defaultLogger.getIoTDefaultLogger('ApplicationName', '1');
+    const message: string = 'Info message';
+    const loggerSpy = sinon.spy(iotLogger.logger, 'warn');
 
+    iotLogger.warning(message);
+
+    expect(iotLogger).not.to.be.undefined;
+    expect(loggerSpy.calledOnce).to.be.true;
+  });
+
+  it.only('Log error to console', () => {
+
+    const iotLogger = defaultLogger.getIoTDefaultLogger('ApplicationName', '1');
+    const message: string = 'Info message';
+    const loggerSpy = sinon.spy(iotLogger.logger, 'error');
+
+    iotLogger.error(message);
+
+    expect(iotLogger).not.to.be.undefined;
+    expect(loggerSpy.calledOnce).to.be.true;
   });
 
   

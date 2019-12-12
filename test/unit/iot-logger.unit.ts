@@ -43,7 +43,6 @@ describe('IotLogger', () => {
   });
 
   it('Create instance', () => {
-
     const iotLogger = new IoTLogger(loggerConfig);
     expect(iotLogger).not.to.be.undefined;
   });
